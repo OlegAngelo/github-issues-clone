@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import IssuesList from './IssuesList';
+import RequestAPI from './apis/RequestAPI';
 
 const App = () => {
-    return (
-        <div>
-            <IssuesList>
+  const [issues, setIssues] = useState([]);
 
-            </IssuesList>
-        </div>
-    );
+  useEffect(() => {
+    RequestAPI.githubAPI()
+    .then((response) => setIssues(response));
+  }, [])
+
+  return (
+    <div>
+      <IssuesList />
+    </div>
+  );
 };
 
 export default App;
+ 
