@@ -7,8 +7,8 @@ const App = () => {
 
   useEffect(() => {
     RequestAPI.githubAPI()
-    .then((response) => setIssues(response));
-  }, [])
+      .then((response) => setIssues(response));
+  }, []);
 
   return (
     <div>
