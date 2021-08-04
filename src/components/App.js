@@ -11,8 +11,8 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      <IssuesList />
+    <div className="container">
+      <IssuesList issues={issues}/>
     </div>
   );
 };
