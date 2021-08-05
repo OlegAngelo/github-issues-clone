@@ -22,19 +22,17 @@ const App = () => {
 
   return (
     <div className='container'>
-      <div>
+      <IssuesList isLoading={isLoading} issues={issues} />
+      <div className='text-center my-5'>
         <Pagination
           onPageChange={handlePaginationChange}
-          boundaryRange={0}
           defaultActivePage={1}
-          ellipsisItem={null}
           firstItem={null}
           lastItem={null}
           siblingRange={1}
-          totalPages={10}
+          totalPages={100}
         />
       </div>
-      <IssuesList isLoading={isLoading} issues={issues} />
     </div>
   );
 };

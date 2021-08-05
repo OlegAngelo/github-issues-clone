@@ -9,7 +9,7 @@ const IssuesList = ({ issues, isLoading }) => {
   return (
     <div>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <h1 className='text-center align-middle'>Loading...</h1>
       ) : (
         <div className='list-group'>{renderedList}</div>
       )}
