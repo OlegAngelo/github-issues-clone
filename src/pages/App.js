@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import IssuesList from "./IssuesList";
-import GithubApi from "./apis/GithubApi";
 import { Pagination } from "semantic-ui-react";
+
+import IssuesList from "./Issues/List/IssuesList";
+
+import GithubApi from "../apis/GithubApi";
 
 const App = () => {
   const [issues, setIssues] = useState([]);

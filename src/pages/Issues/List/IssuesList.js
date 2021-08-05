@@ -1,5 +1,6 @@
 import React from "react";
-import IssuesListItem from "./IssuesListItem";
+
+import IssuesListItem from "../ListItem/IssuesListItem";
 
 const IssuesList = ({ issues, isLoading }) => {
   const renderedList = issues.map((issue) => {
