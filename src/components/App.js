@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import IssuesList from "./IssuesList";
-import RequestAPI from "./apis/RequestAPI";
+import GithubApi from "./apis/GithubApi";
 import { Pagination } from "semantic-ui-react";
 
 const App = () => {
@@ -10,14 +10,14 @@ const App = () => {
   const handlePaginationChange = (e, { activePage }) => {
     setIsLoading(true);
 
-    RequestAPI.githubAPI(activePage).then((res) => {
+    GithubApi.fetchIssues(activePage).then((res) => {
       setIsLoading(false);
       setIssues(res);
     });
   };
 
   useEffect(() => {
-    RequestAPI.githubAPI().then((response) => setIssues(response));
+    GithubApi.fetchIssues().then((response) => setIssues(response));
   }, []);
 
   return (

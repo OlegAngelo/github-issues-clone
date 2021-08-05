@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const RequestAPI = {
-  githubAPI: async (page) => {
+const GithubApi = {
+  fetchIssues: async (page) => {
     const { data } = await axios.get(
       "https://api.github.com/repos/vuejs/vue/issues",
       {
@@ -17,4 +17,4 @@ const RequestAPI = {
   },
 };
 
-export default RequestAPI;
+export default GithubApi;
