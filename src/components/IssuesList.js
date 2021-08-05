@@ -1,18 +1,20 @@
-import React from 'react';
-import IssuesListItem from './IssuesListItem';
+import React from "react";
+import IssuesListItem from "./IssuesListItem";
 
-const IssuesList = ({ issues }) => {
+const IssuesList = ({ issues, isLoading }) => {
   const renderedList = issues.map((issue) => {
-    return <IssuesListItem key={issue.id} issue={issue} />
+    return <IssuesListItem key={issue.id} issue={issue} />;
   });
 
   return (
-    <div className="list-group">
-        {renderedList}
+    <div>
+      {isLoading ? (
+        <h1 className='text-center align-middle'>Loading...</h1>
+      ) : (
+        <div className='list-group'>{renderedList}</div>
+      )}
     </div>
   );
 };
 
 export default IssuesList;
- 
- 
