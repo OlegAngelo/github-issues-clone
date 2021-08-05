@@ -22,7 +22,7 @@ const IssuesListItem = ({ issue }) => {
       return (
         <span 
           className="mx-2 px-2 rounded-pill" 
-          key="label.id" 
+          key={label.id}
           style={{ backgroundColor: `#${label.color}` }}
         >
           {label.name}
