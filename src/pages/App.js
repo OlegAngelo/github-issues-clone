@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Pagination, Dropdown, Grid } from "semantic-ui-react";
 
 import IssuesList from "./Issues/List/IssuesList";
-import  { filters } from "../json/filteroptions";
+import IssueDetails from "./Issues/Detail/IssueDetails";
+import { filters } from "../json/filteroptions";
 
 import GithubApi from "../apis/GithubApi";
 
@@ -42,34 +44,43 @@ const App = () => {
   };
 
   return (
-    <div className='container'>
-      <div>
-        <Grid columns={2}>
-          <Grid.Column>
-            <Dropdown
-              onChange={handleFilterChange}
-              options={filterOptions}
-              placeholder='Choose an option'
-              selection
-              value={filter}
-            />
-          </Grid.Column>
-        </Grid>
-      </div>
+    <Router>
+      <div className='container'>
+        <Switch>
+          <Route exact path='/'>
+            <div>
+              <Grid columns={2}>
+                <Grid.Column>
+                  <Dropdown
+                    onChange={handleFilterChange}
+                    options={filterOptions}
+                    placeholder='Choose an option'
+                    selection
+                    value={filter}
+                  />
+                </Grid.Column>
+              </Grid>
+            </div>
 
-      <IssuesList isLoading={isLoading} issues={issues} />
+            <IssuesList isLoading={isLoading} issues={issues} />
 
-      <div className='text-center my-5'>
-        <Pagination
-          onPageChange={handlePaginationChange}
-          firstItem={null}
-          lastItem={null}
-          siblingRange={1}
-          totalPages={100}
-          activePage={page}
-        />
+            <div className='text-center my-5'>
+              <Pagination
+                onPageChange={handlePaginationChange}
+                firstItem={null}
+                lastItem={null}
+                siblingRange={1}
+                totalPages={100}
+                activePage={page}
+              />
+            </div>
+          </Route>
+          <Route exact path='/issues/:number'>
+            <IssueDetails />
+          </Route>
+        </Switch>
       </div>
-    </div>
+    </Router>
   );
 };
 

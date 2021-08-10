@@ -1,11 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Dimmer, Loader } from "semantic-ui-react";
 
 import IssuesListItem from "../ListItem/IssuesListItem";
 
+import "./css/IssuesList.css";
+
 const IssuesList = ({ issues, isLoading }) => {
   const renderedList = issues.map((issue) => {
-    return <IssuesListItem key={issue.id} issue={issue} />;
+    return (
+      <Link to={`/issues/${issue.number}`} key={issue.id} className='list-group'>
+        <IssuesListItem issue={issue} />
+      </Link>
+    );
   });
 
   return (
@@ -15,7 +22,7 @@ const IssuesList = ({ issues, isLoading }) => {
           <Loader inverted>Loading</Loader>
         </Dimmer>
       ) : (
-        <div className='list-group'>{renderedList}</div>
+        <div>{renderedList}</div>
       )}
     </div>
   );
