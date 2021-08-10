@@ -9,7 +9,11 @@ import "./css/IssuesList.css";
 const IssuesList = ({ issues, isLoading }) => {
   const renderedList = issues.map((issue) => {
     return (
-      <Link to={`/issues/${issue.number}`} key={issue.id} className='list-group'>
+      <Link
+        to={`/issues/${issue.number}`}
+        key={issue.id}
+        className='list-group'
+      >
         <IssuesListItem issue={issue} />
       </Link>
     );
