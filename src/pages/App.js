@@ -7,9 +7,9 @@ import GithubApi from "../apis/GithubApi";
 
 const App = () => {
   const [issues, setIssues] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState("all");
+  const [page, setPage] = useState(1);
   const filterOptions = [
     { key: 1, text: "All", value: "all" },
     { key: 2, text: "Open", value: "open" },
@@ -17,7 +17,10 @@ const App = () => {
   ];
 
   useEffect(() => {
-    GithubApi.fetchIssues().then((response) => setIssues(response));
+    GithubApi.fetchIssues().then((response) => {
+      setIssues(response);
+      setIsLoading(false);
+    });
   }, []);
 
   const handlePaginationChange = (e, { activePage }) => {
@@ -33,10 +36,11 @@ const App = () => {
   const handleFilterChange = (e, { value }) => {
     setIsLoading(true);
 
-    GithubApi.fetchIssues(page, value).then((res) => {
+    GithubApi.fetchIssues(1, value).then((res) => {
       setIsLoading(false);
       setFilter(value);
       setIssues(res);
+      setPage(1);
     });
   };
 
@@ -61,11 +65,11 @@ const App = () => {
       <div className='text-center my-5'>
         <Pagination
           onPageChange={handlePaginationChange}
-          defaultActivePage={1}
           firstItem={null}
           lastItem={null}
           siblingRange={1}
           totalPages={100}
+          activePage={page}
         />
       </div>
     </div>
