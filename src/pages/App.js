@@ -8,7 +8,13 @@ import GithubApi from "../apis/GithubApi";
 const App = () => {
   const [issues, setIssues] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [value, setValue] = useState([]);
+  const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState("all");
+  const filterOptions = [
+    { key: 1, text: "All", value: "all" },
+    { key: 2, text: "Open", value: "open" },
+    { key: 3, text: "Closed", value: "closed" },
+  ];
 
   useEffect(() => {
     GithubApi.fetchIssues().then((response) => setIssues(response));
@@ -17,22 +23,21 @@ const App = () => {
   const handlePaginationChange = (e, { activePage }) => {
     setIsLoading(true);
 
-    GithubApi.fetchIssues(activePage).then((res) => {
+    GithubApi.fetchIssues(activePage, filter).then((res) => {
       setIsLoading(false);
       setIssues(res);
+      setPage(activePage);
     });
   };
 
-  const options = [
-    { key: 1, text: "All", value: "all" },
-    { key: 2, text: "Open", value: "open" },
-    { key: 3, text: "Closed", value: "closed" },
-  ];
+  const handleFilterChange = (e, { value }) => {
+    setIsLoading(true);
 
-  const handleChange = (e, { activeState }) => {
-    GithubApi.fetchIssues(activeState).then((res) => {
-      setValue(res);
-    }); 
+    GithubApi.fetchIssues(page, value).then((res) => {
+      setIsLoading(false);
+      setFilter(value);
+      setIssues(res);
+    });
   };
 
   return (
@@ -41,12 +46,11 @@ const App = () => {
         <Grid columns={2}>
           <Grid.Column>
             <Dropdown
-              onChange={handleChange}
-              options={options}
+              onChange={handleFilterChange}
+              options={filterOptions}
               placeholder='Choose an option'
               selection
-              value={value}
-              multiple={true}
+              value={filter}
             />
           </Grid.Column>
         </Grid>

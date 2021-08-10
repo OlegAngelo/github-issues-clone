@@ -8,7 +8,7 @@ const GithubApi = {
         params: {
           page,
           per_page: 25,
-          state 
+          state,
         },
       }
     );
