@@ -1,5 +1,7 @@
 import React from "react";
-import IssuesListItem from "./IssuesListItem";
+import { Dimmer, Loader } from "semantic-ui-react";
+
+import IssuesListItem from "../ListItem/IssuesListItem";
 
 const IssuesList = ({ issues, isLoading }) => {
   const renderedList = issues.map((issue) => {
@@ -9,7 +11,9 @@ const IssuesList = ({ issues, isLoading }) => {
   return (
     <div>
       {isLoading ? (
-        <h1 className='text-center align-middle'>Loading...</h1>
+        <Dimmer active inverted>
+          <Loader inverted>Loading</Loader>
+        </Dimmer>
       ) : (
         <div className='list-group'>{renderedList}</div>
       )}
