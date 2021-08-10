@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Pagination, Dropdown, Grid } from "semantic-ui-react";
 
 import IssuesList from "./Issues/List/IssuesList";
-import  FilterOptions from "./FilterOptions";
+import  { filters } from "../json/filteroptions";
 
 import GithubApi from "../apis/GithubApi";
 
@@ -11,7 +11,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState("all");
   const [page, setPage] = useState(1);
-  const filterOptions = FilterOptions.filters;
+  const filterOptions = filters;
 
   useEffect(() => {
     GithubApi.fetchIssues().then((response) => {
