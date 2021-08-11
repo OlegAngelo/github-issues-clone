@@ -14,7 +14,6 @@ const IssueDetails = () => {
       setDetails(response);
       setIsFetching(false);
     });
-
   }, []);
 
   return (
@@ -31,7 +30,7 @@ const IssueDetails = () => {
             <Loader inverted>Loading</Loader>
           </Dimmer>
         ) : (
-          <HeaderDetails details={details}/>
+          <HeaderDetails details={details} />
         )}
       </div>
     </div>

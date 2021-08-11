@@ -35,13 +35,6 @@ const HeaderDetails = ({ details }) => {
       </div>
 
       <Divider />
-
-      <Segment className='bg-light' attached='top'>
-        <b>{login}</b> commented {dateInfo()}
-      </Segment>
-      <Segment attached>
-        <p>{body}</p>
-      </Segment>
     </div>
   );
 };
