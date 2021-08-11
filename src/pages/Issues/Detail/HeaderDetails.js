@@ -1,11 +1,18 @@
 import React from "react";
 import moment from "moment";
-import { Divider, Header, Segment } from "semantic-ui-react";
+import { Divider, Segment, Image } from "semantic-ui-react";
+import parse from "html-react-parser";
 
 const HeaderDetails = ({ details }) => {
   console.log(details);
-  const { title, number, body, state, user, comments } = details;
-  const { login } = user;
+  const {
+    title,
+    number,
+    body,
+    state,
+    user: { login, avatar_url },
+    comments,
+  } = details;
 
   const dateInfo = () => {
     const issueCreatedAt = moment(details.created_at);
@@ -35,6 +42,23 @@ const HeaderDetails = ({ details }) => {
       </div>
 
       <Divider />
+
+      <div className='container'>
+        <div className='row'>
+          <div className='col'>
+            <Image alt='avatar' src={`${avatar_url}`} avatar circular />
+          </div>
+
+          <div className='col-11'>
+            <Segment className='bg-light' attached='top'>
+              <b>{login}</b> commented {dateInfo()}
+            </Segment>
+            <Segment attached>
+              <p>{parse(`${body}`)}</p>
+            </Segment>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
