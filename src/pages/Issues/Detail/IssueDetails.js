@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import HeaderDetails from "./HeaderDetails";
+import InfoDetails from "./components/InfoDetails";
 import { useParams, Link } from "react-router-dom";
 import GithubApi from "../../../apis/GithubApi";
 import { Dimmer, Loader } from "semantic-ui-react";
@@ -30,7 +30,7 @@ const IssueDetails = () => {
             <Loader inverted>Loading</Loader>
           </Dimmer>
         ) : (
-          <HeaderDetails details={details} />
+          <InfoDetails details={details} />
         )}
       </div>
     </div>

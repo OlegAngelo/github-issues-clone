@@ -1,10 +1,10 @@
 import React from "react";
 import moment from "moment";
 import { Divider, Segment, Image } from "semantic-ui-react";
-import parse from "html-react-parser";
+import ReactMarkdown from "react-markdown";
+import { gfm } from "micromark-extension-gfm";
 
-const HeaderDetails = ({ details }) => {
-  console.log(details);
+const InfoDetails = ({ details }) => {
   const {
     title,
     number,
@@ -54,7 +54,7 @@ const HeaderDetails = ({ details }) => {
               <b>{login}</b> commented {dateInfo()}
             </Segment>
             <Segment attached>
-              <p>{parse(`${body}`)}</p>
+              <ReactMarkdown remarkPlugins={[gfm]} children={body} />
             </Segment>
           </div>
         </div>
@@ -63,4 +63,4 @@ const HeaderDetails = ({ details }) => {
   );
 };
 
-export default HeaderDetails;
+export default InfoDetails;
