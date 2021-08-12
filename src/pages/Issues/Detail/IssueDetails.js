@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import InfoDetails from "./components/InfoDetails";
 import { useParams, Link } from "react-router-dom";
 import GithubApi from "../../../apis/GithubApi";
 import { Dimmer, Loader } from "semantic-ui-react";
+import { Divider } from "semantic-ui-react";
+import HeaderDetails from "./components/HeaderDetails";
+import BodyDetails from "./components/BodyDetails";
+import moment from "moment";
 
 const IssueDetails = () => {
   const { number } = useParams();
@@ -15,6 +18,18 @@ const IssueDetails = () => {
       setIsFetching(false);
     });
   }, []);
+
+  const dateInfo = () => {
+    const issueCreatedAt = moment(details.created_at);
+    const currentMonth = moment().format("M");
+    const githubMonth = issueCreatedAt.format("M");
+
+    if (currentMonth === githubMonth) {
+      return issueCreatedAt.fromNow();
+    }
+
+    return `on ${issueCreatedAt.format("MMM D")}`;
+  };
 
   return (
     <div>
@@ -30,7 +45,13 @@ const IssueDetails = () => {
             <Loader inverted>Loading</Loader>
           </Dimmer>
         ) : (
-          <InfoDetails details={details} />
+          <div>
+            <HeaderDetails dateInfo={dateInfo} details={details} />
+
+            <Divider />
+
+            <BodyDetails dateInfo={dateInfo} details={details} />
+          </div>
         )}
       </div>
     </div>
