@@ -15,6 +15,14 @@ const GithubApi = {
 
     return data;
   },
+
+  fetchIssueDetails: async (number) => {
+    const { data } = await axios.get(
+      `https://api.github.com/repos/vuejs/vue/issues/${number}`
+    );
+
+    return data;
+  },
 };
 
 export default GithubApi;
